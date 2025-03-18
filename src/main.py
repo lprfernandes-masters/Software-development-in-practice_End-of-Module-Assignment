@@ -67,6 +67,14 @@ def input_flight() -> dict:
         "Start City": start_city,
         "End City": end_city
     }
+def display_records(records):
+    if not records:
+        print("No records found.")
+    else:
+        for rec in records:
+            for key, value in rec.items():
+                print(f"{key}: {value}")
+            print("-" * 40)
 
 
 
