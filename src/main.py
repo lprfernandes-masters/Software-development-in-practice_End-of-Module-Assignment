@@ -75,6 +75,41 @@ def display_records(records):
             for key, value in rec.items():
                 print(f"{key}: {value}")
             print("-" * 40)
+class RecordManager:
+    def __init__(self, file_name=FILE_NAME):
+        self.file_name = file_name
+        self.records = []  # Internal storage as a list of dictionaries.
+        self.load_records()
+
+    def add_record(self, record: dict):
+        if record.get("Type") in ("Client", "Airline"):
+            if record.get("ID") is None or not self.is_unique_id(record["Type"], record["ID"]):
+                record["ID"] = self.generate_id(record["Type"])
+        self.records.append(record)
+
+    def delete_record(self, record: dict):
+        try:
+            self.records.remove(record)
+            return True
+        except ValueError:
+            return False
+
+    def update_record(self, index: int, new_record: dict):
+        if self.records[index].get("Type") in ("Client", "Airline"):
+            if new_record.get("ID") != self.records[index].get("ID"):
+                if not self.is_unique_id(new_record["Type"], new_record.get("ID"), ignore_index=index):
+                    print("Error: The provided ID is not unique. Update aborted.")
+                    return False
+        self.records[index] = new_record
+        return True
+
+    def search_records(self, record_type: str, search_key: str, search_value: str):
+        results = []
+        for rec in self.records:
+            if rec.get("Type") == record_type:
+                if str(rec.get(search_key, "")).lower() == str(search_value).lower():
+                    results.append(rec)
+        return results
 
 
 
