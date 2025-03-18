@@ -13,5 +13,6 @@ def main_menu():
     print("5. Exit")
     # (CLI commands will be integrated later)
 
+
 if __name__ == '__main__':
     main_menu()
