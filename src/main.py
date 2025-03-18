@@ -169,3 +169,10 @@ def get_airline_by_id(manager: RecordManager, airline_id: int):
         if rec.get("Type") == "Airline" and rec.get("ID") == airline_id:
             return rec
     return None
+
+
+
+
+
+if __name__ == '__main__':
+    main_menu()
