@@ -3,9 +3,7 @@ import os
 from datetime import datetime
 
 FILE_NAME = 'records.json'
-# -------------------------------------------
-# Persistent Record Manager with CRUD operations
-# -------------------------------------------
+
 class RecordManager:
     def __init__(self, file_name=FILE_NAME):
         self.file_name = file_name
@@ -83,9 +81,7 @@ class RecordManager:
                 if rec.get("ID") == id_value:
                     return False
         return True
-# -------------------------------------------
-# Input functions for record creation
-# -------------------------------------------
+
 def input_client() -> dict:
     name = input("Enter client name: ")
     addr1 = input("Enter Address Line 1: ")
@@ -142,9 +138,7 @@ def input_flight() -> dict:
         "End City": end_city
     }
 
-# -------------------------------------------
-# Utility function to display records
-# -------------------------------------------
+  
 def display_records(records):
     if not records:
         print("No records found.")
@@ -153,15 +147,27 @@ def display_records(records):
             for key, value in rec.items():
                 print(f"{key}: {value}")
             print("-" * 40)
-# -------------------------------------------
-# Helper functions to cross-reference records
-# -------------------------------------------
 def get_client_by_id(manager: RecordManager, client_id: int):
     """Return the Client record that has the given ID."""
     for rec in manager.records:
         if rec.get("Type") == "Client" and rec.get("ID") == client_id:
             return rec
     return None
+  
+
+def get_airline_by_id(manager: RecordManager, airline_id: int):
+    """Return the Airline record that has the given ID."""
+    for rec in manager.records:
+        if rec.get("Type") == "Airline" and rec.get("ID") == airline_id:
+            return rec
+    return None
+
+  
+class RecordManager:
+    def __init__(self, file_name=FILE_NAME):
+        self.file_name = file_name
+        self.records = []  # Internal storage as a list of dictionaries.
+        self.load_records()
 
 def get_airline_by_id(manager: RecordManager, airline_id: int):
     """Return the Airline record that has the given ID."""
@@ -171,9 +177,6 @@ def get_airline_by_id(manager: RecordManager, airline_id: int):
     return None
 
 
-# -------------------------------------------
-# Advanced flight search with multiple options
-# -------------------------------------------
 def search_flight_menu(manager: RecordManager):
     print("\nSearch Flight Records by:")
     print("1. Client Name")
@@ -230,9 +233,7 @@ def search_flight_menu(manager: RecordManager):
     else:
         print("No matching flight records found.")
 
-# -------------------------------------------
-# CLI Menus for CRUD operations
-# -------------------------------------------
+        
 def create_menu(manager: RecordManager):
     print("\n--- Create Record ---")
     print("a. Client Record")
@@ -390,9 +391,6 @@ def search_menu(manager: RecordManager):
     else:
         print("Invalid option.")
 
-# -------------------------------------------
-# Main CLI loop
-# -------------------------------------------
 def main_menu():
     manager = RecordManager()
     while True:
