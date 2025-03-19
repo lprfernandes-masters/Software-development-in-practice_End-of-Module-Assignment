@@ -1,26 +1,26 @@
-
 import json
 import os
 
 
-def load_records(file_name=r'src\data\records.json'):
+def load_records(file_name='src/data/records.json'):
     """Load records from a JSON file if it exists."""
     if os.path.exists(file_name):
         with open(file_name, 'r') as f:
             try:
-                return json.load(f)
-                print(f"Loaded {len(self.records)} records.")
+                records = json.load(f)
+                print(f"Loaded {len(records)} records.")
+                return records
             except Exception as e:
-                return []
                 print(f"Error loading records: {e}")
+                return []
     return []
 
 
-def save_records(records, file_name=r'src\data\records.json'):
+def save_records(records, file_name='src/data/records.json'):
     """Save the current records to a JSON file."""
     with open(file_name, 'w') as f:
         try:
-            json.dump(self.records, f, indent=4)
+            json.dump(records, f, indent=4)
             print("Records saved successfully.")
         except Exception as e:
             print(f"Error saving records: {e}")

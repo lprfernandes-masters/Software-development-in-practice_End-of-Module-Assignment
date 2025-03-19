@@ -1,4 +1,4 @@
-
+"""
 from datetime import datetime
 
 
@@ -72,7 +72,6 @@ def display_records(records):
 
 
 def get_client_by_id(manager: RecordManager, client_id: int):
-    """Return the Client record that has the given ID."""
     for rec in manager.records:
         if rec.get("Type") == "Client" and rec.get("ID") == client_id:
             return rec
@@ -80,7 +79,6 @@ def get_client_by_id(manager: RecordManager, client_id: int):
 
 
 def get_airline_by_id(manager: RecordManager, airline_id: int):
-    """Return the Airline record that has the given ID."""
     for rec in manager.records:
         if rec.get("Type") == "Airline" and rec.get("ID") == airline_id:
             return rec
@@ -333,6 +331,41 @@ def main_menu():
         else:
             print("Invalid choice. Please select 1-5.")
 
-
 if __name__ == '__main__':
     main_menu()
+
+"""
+from services.record_manager import RecordManager
+
+
+def main():
+    # Create an instance of RecordManager which automatically loads records.
+    manager = RecordManager()
+
+    # Display current records
+    print("Current records:")
+    for record in manager.records:
+        print(record)
+
+    # Example: add a new client record
+    new_client = {
+        "Type": "Client",
+        "Name": "Alice Smith",
+        "Address Line 1": "123 Main St",
+        "Address Line 2": "",
+        "Address Line 3": "",
+        "City": "Metropolis",
+        "State": "NY",
+        "Zip Code": "10001",
+        "Country": "USA",
+        "Phone Number": "123-456-7890"
+    }
+
+    manager.add_record(new_client)
+    print("\nRecords after adding a new client:")
+    for record in manager.records:
+        print(record)
+
+
+if __name__ == "__main__":
+    main()
