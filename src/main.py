@@ -1,86 +1,8 @@
-import json
-import os
+
 from datetime import datetime
 
 FILE_NAME = 'records.json'
 
-class RecordManager:
-    def __init__(self, file_name=FILE_NAME):
-        self.file_name = file_name
-        self.records = []  # Internal storage as a list of dictionaries.
-        self.load_records()
-
-    def add_record(self, record: dict):
-        """Add a new record. For Client and Airline records, ensure a unique ID."""
-        if record.get("Type") in ("Client", "Airline"):
-            if record.get("ID") is None or not self.is_unique_id(record["Type"], record["ID"]):
-                record["ID"] = self.generate_id(record["Type"])
-        self.records.append(record)
-
-    def delete_record(self, record: dict):
-        """Delete the specified record."""
-        try:
-            self.records.remove(record)
-            return True
-        except ValueError:
-            return False
-
-    def update_record(self, index: int, new_record: dict):
-        """Update a record at the given index. Ensure new IDs are unique for Client and Airline."""
-        if self.records[index].get("Type") in ("Client", "Airline"):
-            if new_record.get("ID") != self.records[index].get("ID"):
-                if not self.is_unique_id(new_record["Type"], new_record.get("ID"), ignore_index=index):
-                    print("Error: The provided ID is not unique. Update aborted.")
-                    return False
-        self.records[index] = new_record
-        return True
-
-    def search_records(self, record_type: str, search_key: str, search_value: str):
-        """Generic search for Client or Airline records by matching key/value (case-insensitive)."""
-        results = []
-        for rec in self.records:
-            if rec.get("Type") == record_type:
-                if str(rec.get(search_key, "")).lower() == str(search_value).lower():
-                    results.append(rec)
-        return results
-
-    def load_records(self):
-        """Load records from a JSON file if it exists."""
-        if os.path.exists(self.file_name):
-            try:
-                with open(self.file_name, 'r') as f:
-                    self.records = json.load(f)
-                print(f"Loaded {len(self.records)} records.")
-            except Exception as e:
-                print(f"Error loading records: {e}")
-                self.records = []
-        else:
-            self.records = []
-
-    def save_records(self):
-        """Save the current records to a JSON file."""
-        try:
-            with open(self.file_name, 'w') as f:
-                json.dump(self.records, f, indent=4)
-            print("Records saved successfully.")
-        except Exception as e:
-            print(f"Error saving records: {e}")
-
-    def generate_id(self, record_type: str):
-        """Generate a new unique ID for a given record type ('Client' or 'Airline')."""
-        ids = [rec["ID"] for rec in self.records
-               if rec.get("Type") == record_type and rec.get("ID") is not None]
-        return max(ids, default=0) + 1
-
-    def is_unique_id(self, record_type: str, id_value: int, ignore_index: int = None):
-        """Check whether id_value is unique among records of record_type."""
-        for idx, rec in enumerate(self.records):
-            if rec.get("Type") == record_type:
-                if ignore_index is not None and idx == ignore_index:
-                    continue
-                if rec.get("ID") == id_value:
-                    return False
-        return True
 
 def input_client() -> dict:
     name = input("Enter client name: ")
@@ -106,6 +28,7 @@ def input_client() -> dict:
         "Phone Number": phone
     }
 
+
 def input_airline() -> dict:
     company_name = input("Enter Airline Company Name: ")
     return {
@@ -113,6 +36,7 @@ def input_airline() -> dict:
         "ID": None,
         "Company Name": company_name
     }
+
 
 def input_flight() -> dict:
     try:
@@ -138,7 +62,7 @@ def input_flight() -> dict:
         "End City": end_city
     }
 
-  
+
 def display_records(records):
     if not records:
         print("No records found.")
@@ -147,13 +71,15 @@ def display_records(records):
             for key, value in rec.items():
                 print(f"{key}: {value}")
             print("-" * 40)
+
+
 def get_client_by_id(manager: RecordManager, client_id: int):
     """Return the Client record that has the given ID."""
     for rec in manager.records:
         if rec.get("Type") == "Client" and rec.get("ID") == client_id:
             return rec
     return None
-  
+
 
 def get_airline_by_id(manager: RecordManager, airline_id: int):
     """Return the Airline record that has the given ID."""
@@ -162,12 +88,13 @@ def get_airline_by_id(manager: RecordManager, airline_id: int):
             return rec
     return None
 
-  
+
 class RecordManager:
     def __init__(self, file_name=FILE_NAME):
         self.file_name = file_name
         self.records = []  # Internal storage as a list of dictionaries.
         self.load_records()
+
 
 def get_airline_by_id(manager: RecordManager, airline_id: int):
     """Return the Airline record that has the given ID."""
@@ -233,7 +160,7 @@ def search_flight_menu(manager: RecordManager):
     else:
         print("No matching flight records found.")
 
-        
+
 def create_menu(manager: RecordManager):
     print("\n--- Create Record ---")
     print("a. Client Record")
@@ -256,6 +183,7 @@ def create_menu(manager: RecordManager):
     else:
         print("Invalid option.")
 
+
 def delete_menu(manager: RecordManager):
     print("\n--- Delete Record ---")
     print("a. Client Record")
@@ -272,7 +200,8 @@ def delete_menu(manager: RecordManager):
         results = manager.search_records(rec_type, "ID", rec_id)
         if results:
             display_records(results)
-            confirm = input("Are you sure you want to delete this record? (y/n): ").strip().lower()
+            confirm = input(
+                "Are you sure you want to delete this record? (y/n): ").strip().lower()
             if confirm == 'y':
                 if manager.delete_record(results[0]):
                     print("Record deleted.")
@@ -296,7 +225,8 @@ def delete_menu(manager: RecordManager):
                     break
         if found:
             display_records([found])
-            confirm = input("Are you sure you want to delete this flight record? (y/n): ").strip().lower()
+            confirm = input(
+                "Are you sure you want to delete this flight record? (y/n): ").strip().lower()
             if confirm == 'y':
                 if manager.delete_record(found):
                     print("Flight record deleted.")
@@ -306,6 +236,7 @@ def delete_menu(manager: RecordManager):
             print("Flight record not found.")
     else:
         print("Invalid option.")
+
 
 def update_menu(manager: RecordManager):
     print("\n--- Update Record ---")
@@ -345,7 +276,8 @@ def update_menu(manager: RecordManager):
         except ValueError:
             print("IDs must be integers.")
             return
-        date_str = input("Enter Date (YYYY-MM-DD HH:MM) of the flight record: ")
+        date_str = input(
+            "Enter Date (YYYY-MM-DD HH:MM) of the flight record: ")
         found = None
         for rec in manager.records:
             if rec.get("Type") == "Flight":
@@ -367,6 +299,7 @@ def update_menu(manager: RecordManager):
             print("Flight record not found.")
     else:
         print("Invalid option.")
+
 
 def search_menu(manager: RecordManager):
     print("\n--- Search and Display Record ---")
@@ -390,6 +323,7 @@ def search_menu(manager: RecordManager):
         search_flight_menu(manager)
     else:
         print("Invalid option.")
+
 
 def main_menu():
     manager = RecordManager()
