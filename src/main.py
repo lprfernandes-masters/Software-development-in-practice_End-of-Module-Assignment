@@ -1,8 +1,6 @@
 
 from datetime import datetime
 
-FILE_NAME = 'records.json'
-
 
 def input_client() -> dict:
     name = input("Enter client name: ")
@@ -79,21 +77,6 @@ def get_client_by_id(manager: RecordManager, client_id: int):
         if rec.get("Type") == "Client" and rec.get("ID") == client_id:
             return rec
     return None
-
-
-def get_airline_by_id(manager: RecordManager, airline_id: int):
-    """Return the Airline record that has the given ID."""
-    for rec in manager.records:
-        if rec.get("Type") == "Airline" and rec.get("ID") == airline_id:
-            return rec
-    return None
-
-
-class RecordManager:
-    def __init__(self, file_name=FILE_NAME):
-        self.file_name = file_name
-        self.records = []  # Internal storage as a list of dictionaries.
-        self.load_records()
 
 
 def get_airline_by_id(manager: RecordManager, airline_id: int):
