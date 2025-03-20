@@ -12,7 +12,7 @@ root.configure(background="white")
 root.geometry("2000x1000")
 
 # Create Sidebar and main area for table and CRUD operations
-sidebar = tk.Frame(root, width=300, background="blue")  
+sidebar = tk.Frame(root, width=200, background="#38b6ff")
 sidebar.pack(side="left", fill="y")
 crud_buttons_area = tk.Frame(root, background="white")
 crud_buttons_area.pack(side="right", expand=True, fill="both")
