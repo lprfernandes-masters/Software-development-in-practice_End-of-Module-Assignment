@@ -21,6 +21,5 @@ def save_records(records, file_name='src/data/records.json'):
     with open(file_name, 'w') as f:
         try:
             json.dump(records, f, indent=4)
-            print("Records saved successfully.")
         except Exception as e:
             print(f"Error saving records: {e}")

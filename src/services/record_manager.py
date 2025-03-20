@@ -31,15 +31,6 @@ class RecordManager:
         save_records(self.records)
         return True
 
-    """
-    def search_records(self, record_type: str, search_key: str, search_value: str):
-        results = []
-        for rec in self.records:
-            if rec.get("Type") == record_type:
-                if str(rec.get(search_key, "")).lower() == str(search_value).lower():
-                    results.append(rec)
-        return results
-    """
 
     def generate_id(self, record_type: str):
         """Generate a new unique ID for a given record type ('Client' or 'Airline')."""
@@ -47,16 +38,6 @@ class RecordManager:
                if rec.get("Type") == record_type and rec.get("ID") is not None]
         return max(ids, default=0) + 1
 
-    """
-    def is_unique_id(self, record_type: str, id_value: int, ignore_index: int = None):
-        for idx, rec in enumerate(self.records):
-            if rec.get("Type") == record_type:
-                if ignore_index is not None and idx == ignore_index:
-                    continue
-                if rec.get("ID") == id_value:
-                    return False
-        return True
-    """
 
     def get_client_by_id(self, client_id: int):
         for rec in self.records:
