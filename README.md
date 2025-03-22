@@ -22,41 +22,34 @@ Search and Display a Record: Search for records and view detailed information.
 # The records are stored as follows:
 
 # Client Record Format
-```json
-
-ID: int
-Type: Client
-Name: string
-Address Line 1: string
-Address Line 2: string
-Address Line 3: string
-City: string
-State: string
-Zip Code: string
-Country: string
-Phone Number: string
+- **ID**: int
+- **Type**: Client
+- **Name**: string
+- **Address Line 1**: string
+- **Address Line 2**: string
+- **Address Line 3**: string
+- **City**: string
+- **State**: string
+- **Zip Code**: string
+- **Country**: string
+- **Phone Number**: string
 
 # Airline Record Format
+- **ID**: int
+- **Type**: string (type of record)
+- **Company Name**: string
 
-ID: int
-Type: str (type of record)
-Company Name: str
-
-# Flight Record Format 
-
-Client_ID:int
-Airline_ID: int
-Date: date/time
-Start City
-End City
+# Flight Record Format
+- **Client_ID**: int
+- **Airline_ID**: int
+- **Date**: date/time
+- **Start City**: string
+- **End City**: string
 
 # Technologies Used
-
-Python for backend programming
-Tkinter for GUI
-JSON  for data persistence
-
+- Python for backend programming
+- Tkinter for GUI
+- JSON for data persistence
 
 # Prerequisites
-
-Python 3.12.4 installed
+- Python 3.12.4 installed
