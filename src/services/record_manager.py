@@ -8,7 +8,7 @@ class RecordManager:
     def add_record(self, record: dict):
         """Add a new record. For Client and Airline records, ensure a unique ID."""
         if record.get("Type") in ("Client", "Airline"):
-            if record.get("ID") is None or not self.is_unique_id(record["Type"], record["ID"]):
+            if record.get("ID") is None:
                 record["ID"] = self.generate_id(record["Type"])
         self.records.append(record)
         save_records(self.records)
