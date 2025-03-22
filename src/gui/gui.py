@@ -129,12 +129,21 @@ class RecordManagementGUI:
             except ValueError:
                 messagebox.showerror("Error", "Invalid ID for flight record.")
                 return
-            # The date will be processed by converting to ISO when updating.
+
+            try:
+                date_obj = datetime.strptime(
+                    form_data["Date (DD-MM-YYYY)"], "%d-%m-%Y")
+            except ValueError:
+                messagebox.showerror(
+                    "Error", "Invalid date format. Use DD-MM-YYYY.")
+                return
+
+            # The date is saved in isoformat.
             record = {
                 "Type": "Flight",
                 "Client_ID": client_id,
                 "Airline_ID": airline_id,
-                "Date": form_data["Date (DD-MM-YYYY)"],
+                "Date": date_obj.isoformat(),
                 "Start City": form_data["Start City"],
                 "End City": form_data["End City"]
             }

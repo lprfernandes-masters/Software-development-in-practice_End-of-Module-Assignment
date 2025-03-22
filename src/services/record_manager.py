@@ -8,7 +8,7 @@ class RecordManager:
     def add_record(self, record: dict):
         """Add a new record. For Client and Airline records, ensure a unique ID."""
         if record.get("Type") in ("Client", "Airline"):
-            if record.get("ID") is None or not self.is_unique_id(record["Type"], record["ID"]):
+            if record.get("ID") is None:
                 record["ID"] = self.generate_id(record["Type"])
         self.records.append(record)
         save_records(self.records)
@@ -31,28 +31,8 @@ class RecordManager:
         save_records(self.records)
         return True
 
-
     def generate_id(self, record_type: str):
         """Generate a new unique ID for a given record type ('Client' or 'Airline')."""
         ids = [rec["ID"] for rec in self.records
                if rec.get("Type") == record_type and rec.get("ID") is not None]
         return max(ids, default=0) + 1
-
-
-    def get_client_by_id(self, client_id: int):
-        for rec in self.records:
-            if rec.get("Type") == "Client" and rec.get("ID") == client_id:
-                return rec
-        return None
-
-    def get_airline_by_id(self, airline_id: int):
-        for rec in self.records:
-            if rec.get("Type") == "Airline" and rec.get("ID") == airline_id:
-                return rec
-        return None
-
-    def get_flight_by_client_id(self, client_id: int):
-        for rec in self.records:
-            if rec.get("Type") == "Flight" and rec.get("Client_ID") == client_id:
-                return rec
-        return None
