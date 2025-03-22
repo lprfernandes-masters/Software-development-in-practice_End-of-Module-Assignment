@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "Type": "Client",
+        "ID": 1,
+        "Name": "Luis Updated"
+    },
+    {
+        "Type": "Flight",
+        "Client_ID": 1,
+        "Airline_ID": 2,
+        "Date": "01-01-2000",
+        "Start City": "City1",
+        "End City": "City2"
+    },
+    {
+        "Type": "Client",
+        "ID": 1,
+        "Name": "Luis"
+    }
+]

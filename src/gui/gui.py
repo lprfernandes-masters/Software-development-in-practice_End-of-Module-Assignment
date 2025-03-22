@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 from datetime import datetime
-from gui.create_forms import *
-from gui.update_forms import *
+from src.gui.create_forms import *
+from src.gui.update_forms import *
 
 
 class RecordManagementGUI:
