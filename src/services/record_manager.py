@@ -1,4 +1,4 @@
-from src.services.file_manager import load_records, save_records
+from .file_manager import load_records, save_records
 
 
 class RecordManager:
