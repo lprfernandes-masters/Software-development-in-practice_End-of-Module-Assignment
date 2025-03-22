@@ -1,0 +1,2 @@
+tkinter  # built-in GUI library
+python # install python
