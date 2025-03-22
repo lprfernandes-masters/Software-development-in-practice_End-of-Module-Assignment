@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 from datetime import datetime
-from src.gui.create_forms import *
-from src.gui.update_forms import *
+from .create_forms import *
+from .update_forms import *
 
 
 class RecordManagementGUI:
@@ -20,7 +20,7 @@ class RecordManagementGUI:
         self.root.geometry("1200x800")
 
         # Sidebar for record type selection (affects creation type only).
-        self.sidebar = tk.Frame(self.root, width=300, bg="blue")
+        self.sidebar = tk.Frame(self.root, width=300, bg="#38b6ff")
         self.sidebar.pack(side="left", fill="y")
 
         tk.Button(
