@@ -2,22 +2,31 @@
 
 This project was developed to build a record management system for a specialized travel agency. The system can handle three different types of records:
 
-Client Records
-Flight Records
-Airline Records
+* Client Records
+* Flight Records
+* Airline Records
 
 The system provides a simple and intuitive Graphical User Interface (GUI) that allows users to:
 
-Create, Delete, Update, and Search/Display records
-Store and manage records using Python's list of dictionaries
-Save records to the file system in JSON and load them upon starting the application
+* Create, Delete, Update, and Search/Display records
+* Store and manage records using Python's list of dictionaries
+* Save records to the file system in JSON and load them upon starting the application
 
 # Features
 
-Create a Record: Add new client, flight, or airline records.
-Delete a Record: Remove an existing record.
-Update a Record: Edit details of an existing record.
-Search and Display a Record: Search for records and view detailed information.
+* Create a Record: 
+   * Client records
+   * Flight record
+   * Airline records
+
+* Delete a Record: 
+   * Remove an existing record.
+
+* Update a Record:
+   * Edit details of an existing record.
+
+* Search and Display a Record:
+   * Search for records and view detailed information.
 
 # The records are stored as follows:
 
@@ -51,5 +60,16 @@ Search and Display a Record: Search for records and view detailed information.
 - Tkinter for GUI
 - JSON for data persistence
 
-# Prerequisites
-- Python 3.12.4 installed
+# Requirements
+- No additional requirements needed. 
+
+### License ###
+This project is for academic purposes and is submitted as part of the assignment.
+
+### How to test ###
+
+* 1. **Clone public repo**: 
+https://github.com/lprfernandes-masters/Software-development-in-practice_End-of-Module-Assignment/tree/master
+* 2. **Change the directory to src folder**
+* 2. **To Run the code execute**: 
+python3 main.py 
