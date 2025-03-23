@@ -1,2 +1,2 @@
-tkinter  # built-in GUI library
-python # install python
+### Requirements ### 
+No additional requirements needed.
